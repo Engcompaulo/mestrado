@@ -1,0 +1,16 @@
+Orange: https://orange.biolab.si/
+
+Tutorial Orange/Teoria:
+	- PCA (principal component analysis): https://docs.biolab.si//3/visual-programming/widgets/unsupervised/PCA.html
+	- Teoria: https://www.youtube.com/watch?v=FgakZw6K1QQ
+
+Classificação:
+	- k-NN: http://docs.biolab.si/3/visual-programming/widgets/model/knn.html
+	- Teoria: https://www.youtube.com/watch?v=UqYde-LULfs
+
+Treinamento e Teste (80% - treino e 20% teste): 
+	- https://datascience.stackexchange.com/questions/23245/training-set-validation-set-and-test-set-with-orange
+ 
+Dataset:
+	- IONOSPHERE: https://archive.ics.uci.edu/ml/datasets/Ionosphere (ou algum outro da UCI https://archive.ics.uci.edu/ml/datasets.html )
+	- ARCENE: https://archive.ics.uci.edu/ml/datasets/Arcene
