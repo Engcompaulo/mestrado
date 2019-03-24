@@ -1,0 +1,186 @@
+
+%% modelo.tex
+%% V1.0
+%% 03/05/2009
+%% Hugo Vieira Neto
+%%
+%% Modelo de artigo de conferência IEEE para LaTeX
+%% Requer os arquivos IEEEtran.cls, IEEEtran.bst e IEEEabrv.bib
+
+% *** PREÂMBULO ***
+\documentclass[conference,peerreview]{IEEEtran}
+% Na versão final do artigo, a opção peerreview deve ser removida para
+% que as informações sobre os autores fiquem aparentes após o título.
+
+% Pacotes para a utilização da língua portuguesa.
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+% As linhas acima devem ser comentadas se o artigo for escrito em inglês.
+
+% Pacotes para o uso de equações e símbolos matemáticos.
+\usepackage[cmex10]{amsmath}
+\usepackage{amsfonts,amssymb}
+
+% Pacotes para o uso de tabelas, gráficos e subfiguras.
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage[caption=false,font=footnotesize]{subfig}
+
+% Pacote para a correta ordenação de figuras em texto com colunas duplas.
+\usepackage{fixltx2e}
+
+% Pacote para a formatação ordenada automática de múltiplas citações.
+\usepackage{cite}
+
+% Pacote para a formatação adequada de URL.
+\usepackage{url}
+
+% Falhas de separação em sílabas devem ser listadas aqui
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+% *** CORPO DO TEXTO ***
+\begin{document}
+
+% Título do artigo
+\title{Modelo de Artigo de Conferência IEEE para \LaTeX}
+% Quebras de linha \\ podem ser inseridas para melhor formatação de títulos
+% longos.
+
+
+% Nome e afiliação do autor
+\author{
+	\IEEEauthorblockN{Hugo Vieira Neto}
+	\IEEEauthorblockA{
+		CPGEI / UTFPR\\
+		Avenida Sete de Setembro, 3165\\
+		Curitiba-PR - CEP 80.230-910\\
+		E-mail: hvieir@utfpr.edu.br\\
+		\url{http://pessoal.utfpr.edu.br/hvieir/}
+	} % \IEEEauthorblockA
+} % \author
+% Para múltiplos autores e afiliações, consultar exemplos no arquivo
+% bare_conf.tex
+
+
+% Formatação do título e autoria do artigo. Em artigos com a opção peerreview,
+% a autoria é ocultada e as páginas são numeradas.
+\ifCLASSOPTIONpeerreview
+	\setcounter{page}{1}
+	\IEEEpeerreviewmaketitle
+\else
+	\maketitle
+\fi
+
+
+% Resumo do artigo
+\begin{abstract}
+Aqui vai o resumo do artigo.
+\end{abstract}
+
+
+% Seções numeradas
+\section{Introdução}
+
+Aqui vai a introdução do artigo.
+
+
+\section{Revisão da literatura}
+
+Aqui vai a revisão da literatura.
+
+
+\subsection{Figuras}
+
+Para o estilo IEEE, as legendas devem vir \emph{depois} das figuras. Um exemplo é mostrado na Figura~\ref{fg_exemp1}.
+
+\begin{figure}[ht] % normalmente utilizar [!t]
+\centering
+\includegraphics[width=2.5cm]{modfig}
+\caption{Exemplo de uma figura.}
+\label{fg_exemp1}
+\end{figure}
+
+A Figura~\ref{fg_exemp2} exemplifica uma figura contendo duas sub-figuras.
+
+\begin{figure}[ht] % normalmente utilizar [!t]
+\centerline{
+	\subfloat[]{\includegraphics[width=2.5cm]{modfig}}
+	\hfil
+	\subfloat[]{\includegraphics[width=2.5cm]{modfig}}
+}
+\caption{Exemplo de uma figura contendo duas sub-figuras: (a) sub-figura~1; (b) sub-figura~2.}
+\label{fg_exemp2}
+\end{figure}
+
+Apesar de figuras no estilo IEEE normalmente serem colocadas no topo da página, as Figuras~\ref{fg_exemp1} e~\ref{fg_exemp2} foram colocadas no meio do texto devido a este modelo de artigo possuir apenas uma página de extensão
+
+
+\subsection{Tabelas}
+
+Para o estilo IEEE, as legendas devem vir \emph{antes} das tabelas. Um exemplo é mostrado na Tabela~\ref{tb_exemp}.
+
+Tabelas no estilo IEEE normalmente são colocadas no topo da página.
+
+\begin{table}[!t] % colocação no topo da página
+\renewcommand{\arraystretch}{1.4} % ajuste do espaçamento das linhas da tabela
+\caption{Exemplo de uma tabela.}
+\label{tb_exemp} % \label{} deve vir sempre depois de \caption{}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+A & B\\
+\hline
+C & D\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Equações}
+
+A Equação~\ref{eq_fourier} apresenta a formulação matemática da transformada de Fourier:
+
+\begin{equation}
+\mathcal{F} \{ x(t) \} = X(\omega) = \int_{-\infty}^{\infty} x(t) \, e^{-j \omega t} \, dt,
+\label{eq_fourier}
+\end{equation}
+onde $x(t)$ representa o sinal no domínio do tempo e $X(\omega)$ representa o sinal no domínio da frequência.
+
+Analogamente, a Equação~\ref{eq_fourier_inv} apresenta a formulação matemática da transformada inversa de Fourier:
+\begin{equation}
+\mathcal{F}^{-1} \{ X(\omega) \} = x(t) = \int_{-\infty}^{\infty} X(\omega) \, e^{j \omega t} \, d\omega.
+\label{eq_fourier_inv}
+\end{equation}
+
+
+\subsection{Citações}
+Um debate sobre a verdadeira identidade de Isadore Nabi ocorreu em seguidos editoriais da revista Nature durante o ano de 1981 \cite{Nabi1981a,Wilson1981,Nabi1981b,Lewontin1981,Nature1981,VanValen1981,Lester1981,Adams1981}.
+
+
+\section{Materiais e métodos}
+
+Aqui vão informações sobre os materiais e métodos utilizados.
+
+
+\section{Resultados e discussão}
+
+Aqui vão os resultados obtidos e sua discussão.
+
+
+\section{Conclusão}
+
+Aqui vai a conclusão do artigo.
+
+
+% Seções não numeradas
+\section*{Reconhecimento}
+
+O autor agradece Leslie Lamport pelo desenvolvimento do \LaTeX\ e Donald Knuth pelo desenvolvimento do \TeX.
+
+
+% Seção de referências
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,modref}
+
+\end{document}

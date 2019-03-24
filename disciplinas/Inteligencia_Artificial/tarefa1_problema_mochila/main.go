@@ -6,6 +6,5 @@ import (
 
 func main() {
 
-	agcanonico.Run()
-
+	agcanonico.Run(false)
 }

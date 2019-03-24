@@ -1,0 +1,17 @@
+Composição do pacote:
+
+1) Arquivos para formatação de artigos no padrão IEEE utilizando o LaTeX (disponíveis originalmente em http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/):
+bare_conf.tex - exemplo de utilização da classe IEEE para artigos em conferências
+IEEEabrv.bib - abreviações padronizadas dos nomes das publicações do IEEE
+IEEEtran.bst - estilo bibliográfico IEEE
+IEEEtran.cls - classe de formatação IEEE
+IEEEtran_bst_HOWTO.pdf - manual de utilização do estilo bibliográfico IEEE
+IEEEtran_HOWTO.pdf - manual de utilização da classe de formatação IEEE
+
+2) Exemplo de utilização da classe de formatação IEEE para artigos em português:
+modelo.pdf - lay-out de artigo em conferência (versão para revisão por pares)
+modelo.tex - exemplo de utilização da classe IEEE para artigos em português
+modfig.jpg - imagem utilizada na exemplificação de figuras e sub-figuras
+modref.bib - bibliografia utilizada na exemplificação de citações e referências
+
+O arquivo modelo.pdf foi gerado sem erros ou advertências utilizando o TeXnicCenter 1.0 RC1 e o MiKTeX 2.7 build 3248 em ambiente Windows.

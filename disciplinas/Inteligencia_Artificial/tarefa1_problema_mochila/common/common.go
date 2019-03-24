@@ -9,11 +9,11 @@ const LimitOfWeight = 120
 //MaxGeneration - Máximo de gerações
 const MaxGeneration = 50
 
-//Pc - Probabilidade de crossover
-const Pc = 0.8
+//Pc - Probabilidade de crossover em %
+const Pc = 80
 
-//Pm - Probabilidade de mutação
-const Pm = 0.05
+//Pm - Probabilidade de mutação em %
+const Pm = 5
 
 //Itens - Relação de itens {peso, valor}
 var Itens = [][]int{ 

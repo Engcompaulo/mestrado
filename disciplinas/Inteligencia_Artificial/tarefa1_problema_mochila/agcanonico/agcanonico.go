@@ -177,11 +177,36 @@ func rouletteOfPopulation(population []uint64) []uint64 {
 	return selected
 }
 
-func crossover(parent1 uint64, parent2 uint64) []uint64 {
+func repair (child uint64) uint64 {
 
-	for {
+	return child
+}
+
+func crossover(parent1 uint64, parent2 uint64, repar bool) []uint64 {
+
+	if !repar {
+		for {
+			rand.Seed(time.Now().UnixNano())
+
+			if rand.Intn(100) + 1 < common.Pc {
+				return []uint64{parent1, parent2}
+			}
+	
+			cut := uint8(rand.Intn(42) + 1)
+		
+			mask := ((^uint64(0)) >> cut) << cut
+			nmask := (^uint64(0)) ^ mask
+	
+			child1 := (mask & parent1) | (nmask & parent2)
+			child2 := (mask & parent2) | (nmask & parent1)
+		
+			if isFactivelIndividual(child1) && isFactivelIndividual(child2) {
+				return []uint64{ child1, child2 }
+			}
+		}
+	} else {
 		rand.Seed(time.Now().UnixNano())
-
+	
 		cut := uint8(rand.Intn(42) + 1)
 	
 		mask := ((^uint64(0)) >> cut) << cut
@@ -189,14 +214,12 @@ func crossover(parent1 uint64, parent2 uint64) []uint64 {
 
 		child1 := (mask & parent1) | (nmask & parent2)
 		child2 := (mask & parent2) | (nmask & parent1)
-	
-		if isFactivelIndividual(child1) && isFactivelIndividual(child2) {
-			return []uint64{ child1, child2 }
-		}
+
+		return []uint64{ repair(child1), repair(child2) }
 	}
 }
 
-func crossoverOfPopulation(selectedPopulation []uint64) []uint64 {
+func crossoverOfPopulation(selectedPopulation []uint64, repar bool) []uint64 {
 
 	var childPopulation []uint64
 
@@ -204,7 +227,7 @@ func crossoverOfPopulation(selectedPopulation []uint64) []uint64 {
 
 	for {
 
-		childPopulation = append(childPopulation, crossover(selectedPopulation[index], selectedPopulation[index + 1])...)
+		childPopulation = append(childPopulation, crossover(selectedPopulation[index], selectedPopulation[index + 1], repar)..., )
 
 		index += 2
 
@@ -218,7 +241,31 @@ func crossoverOfPopulation(selectedPopulation []uint64) []uint64 {
 
 func mutate(child uint64) uint64 {
 
-	return child
+	var mutateChild uint64
+
+	for {	
+		mutateChild = child
+		index := uint8(0)
+		for {
+			if index == 42 {
+				break;
+			}
+
+			rand.Seed(time.Now().UnixNano())
+
+			if rand.Intn(100) + 1 < common.Pm {
+				mutateChild = mutateChild ^ (uint64(1) << index)
+			}
+
+			index++
+		}
+
+		if isFactivelIndividual(mutateChild) {
+			break;
+		}
+	}
+
+	return mutateChild
 }
 
 func mutationOfPopulation(childPopulation []uint64) []uint64 {
@@ -226,11 +273,6 @@ func mutationOfPopulation(childPopulation []uint64) []uint64 {
 	var mutatePopulation []uint64
 
 	for _, child := range childPopulation {
-
-		if mutatePopulation == nil {
-			mutatePopulation = []uint64{ mutate(child) }
-			continue
-		}
 
 		mutatePopulation = append(mutatePopulation, mutate(child))
 	}
@@ -282,7 +324,7 @@ func selectNewPopulation(population []uint64, childPopulation []uint64) []uint64
 }
 
 //Run - Executa algorítmo genético canónico
-func Run() {
+func Run(repar bool) {
 
 	population := getInitialPopulation(common.SizeOfPopulation)
 
@@ -293,7 +335,7 @@ func Run() {
 
 		selected := rouletteOfPopulation(population)
 
-		childPopulation := crossoverOfPopulation(selected)
+		childPopulation := crossoverOfPopulation(selected, repar)
 
 		mutatePopulation := mutationOfPopulation(childPopulation)
 
