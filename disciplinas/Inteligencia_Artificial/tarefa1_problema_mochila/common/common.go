@@ -1,13 +1,16 @@
 package common
 
 //SizeOfPopulation - Tamanho da população
-const SizeOfPopulation = 10
+const SizeOfPopulation = 100
+
+//M - Quantidade de pares a sofrerem crossover
+const M = 20
 
 //LimitOfWeight - Limite de peso
 const LimitOfWeight = 120
 
 //MaxGeneration - Máximo de gerações
-const MaxGeneration = 50
+const MaxGeneration = 500
 
 //Pc - Probabilidade de crossover em %
 const Pc = 80
