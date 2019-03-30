@@ -11,7 +11,7 @@
             "mode": "auto",
             "program": "${fileDirname}/main.go",
             "env": {},
-            "args": []
+            "args": ["Repair", "100", "50", "500", "1"]
         }
     ]
 }

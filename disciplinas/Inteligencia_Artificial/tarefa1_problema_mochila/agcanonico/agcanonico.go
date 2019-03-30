@@ -1,9 +1,9 @@
 package agcanonico
 
 import (
+	"time"
 	"fmt"
 	"sort"
-	"time"
 	"math/rand"
 	"strconv"
 	"tarefa1_problema_mochila/common"
@@ -179,7 +179,7 @@ func roulette(normalizedFitnessOfPopulation []float32, population []uint64) uint
 
 	for {
 
-		if sum > r {
+		if sum >= r {
 			break;
 		}
 
@@ -206,7 +206,7 @@ func rouletteOfPopulation(population []uint64, penalize bool) []uint64 {
 
 		index++
 
-		if index == common.M*2 {
+		if index == M*2 {
 			break
 		}
 	}
@@ -311,7 +311,7 @@ func crossoverAndMutateOfPopulation(selectedPopulation []uint64, repar bool) []u
 
 		index += 2
 
-		if common.M*2 == len(childPopulation) {
+		if M*2 == len(childPopulation) {
 			break
 		}
 	}
@@ -346,7 +346,7 @@ func selectNewPopulation(population []uint64, childPopulation []uint64, penalize
 	sort.Sort(byFitness(newPopulation))
 
 	var newPopulationR []uint64
-	index :=  2*common.M
+	index :=  2*M
 
 	for {
 
@@ -362,17 +362,38 @@ func selectNewPopulation(population []uint64, childPopulation []uint64, penalize
 	return newPopulationR
 }
 
-//Run - Executa algorítmo genético canónico
-func Run(repar bool) {
+var SizeOfPopulation int
+var M int
+var MaxGeneration int
 
-	population := getInitialPopulation(common.SizeOfPopulation, repar)
+//Run - Executa algorítmo genético canónico
+func Run(repar bool, sizeOfPopulation int, m int, maxGeneration int, sample int) {
+
+	SizeOfPopulation = sizeOfPopulation
+
+	M = m
+
+	MaxGeneration = maxGeneration
+
+	population := getInitialPopulation(SizeOfPopulation, repar)
 
 	bestIndividual := getBestIndividual(population, getFitnessOfPopulation(population, !repar))
-
-	fmt.Println(bestIndividual, getMaxWeight(bestIndividual), getMaxFitnessOfPopulation(getFitnessOfPopulation(population, !repar)), getAverageFitnessOfPopulation(getFitnessOfPopulation(population, !repar)))
 	
-	generation := 0
+	fmt.Printf("%v,", sample)
+
+	for index := range common.Itens {
+
+		if ((bestIndividual >> uint8(index)) & uint64(1)) == 1 {
+			fmt.Printf(strconv.Itoa((index + 1)) + "|")
+		}
+	}
+
+	fmt.Printf(",%v,%v,%v,0\n", getMaxWeight(bestIndividual), getMaxFitnessOfPopulation(getFitnessOfPopulation(population, !repar)), getAverageFitnessOfPopulation(getFitnessOfPopulation(population, !repar)))
+	
+	generation := 1
 	for {
+
+		start := time.Now()
 
 		selected := rouletteOfPopulation(population, !repar)
 
@@ -382,20 +403,21 @@ func Run(repar bool) {
 
 		bestIndividual := getBestIndividual(population, getFitnessOfPopulation(population, !repar))
 
-		fmt.Println(bestIndividual, getMaxWeight(bestIndividual), getMaxFitnessOfPopulation(getFitnessOfPopulation(population, !repar)), getAverageFitnessOfPopulation(getFitnessOfPopulation(population, !repar)))
+		fmt.Printf("%v,", sample)
+
+		for index := range common.Itens {
+
+			if ((bestIndividual >> uint8(index)) & uint64(1)) == 1 {
+				fmt.Printf(strconv.Itoa((index + 1)) + "|")
+			}
+		}
 	
+		fmt.Printf(",%v,%v,%v,%s\n", getMaxWeight(bestIndividual), getMaxFitnessOfPopulation(getFitnessOfPopulation(population, !repar)), getAverageFitnessOfPopulation(getFitnessOfPopulation(population, !repar)), time.Since(start))
+		
 		generation++
 
-		if generation == common.MaxGeneration {
+		if generation == MaxGeneration {
 			break;
 		}
-	}
-
-	fmt.Println("Melhor individio:")
-	for index := range common.Itens {
-
-		if ((bestIndividual >> uint8(index)) & uint64(1)) == 1 {
-			fmt.Println("Item: " + strconv.Itoa((index + 1)))
-		}
-	}
+	}	
 }
