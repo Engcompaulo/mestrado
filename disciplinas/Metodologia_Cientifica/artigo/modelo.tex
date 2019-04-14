@@ -72,18 +72,31 @@
 
 % Resumo do artigo
 \begin{abstract}
-Aqui vai o resumo do artigo.
+A identificação da espécie de um fungo causador de doenças é determinante na escolha do tratamento mais adequado. Contudo tal tarefa pode ser desafiadora dada as semelhanças entre as espécies. Para tanto, pode ser utilizado o sequenciamento genético, entretanto, é uma técnica de elevado custo e requer equipamentos que não estão facilmente disponíveis.
+Este trabalho apresenta uma proposta de projeto para analisar dados do espectro Raman de algumas espécies de fungos através de técnicas de aprendizado de máquinas, de forma que, consiga-se identificar quais dados são relevantes para diferenciação e identificação de uma espécie específica dentre as analisadas. 
 \end{abstract}
 
 \section{Introdução}
+O Reino Fungi é composto pelas mais variadas formas de seres, desde micro-organismos até cogumelos. Contudo, quando deseja-se diferenciar espécies de mesmo gênero (táxon da classificação biológica) isto torna-se uma tarefa árdua, pois tais diferenças só são perceptíveis nas estruturas celulares destes seres, como pode ser verificado na figura \ref{fg_exemp1}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=7.5cm]{fungus_dif}
+\caption{Diferença nas estruturas celulares das espécies fungos fumigatus e nidulans ambos do gênero Aspergillus. Crédito: Lee et al. The Fungal Exopolysaccharide Galactosaminogalactan Mediates Virulence by Enhancing Resistance to Neutrophil Extracellular Traps. PLOS Pathogens, 2015; 11 (10): e1005187}
+\label{fg_exemp1}
+\end{figure}
+
+Realizar o sequênciamento genético de uma amostra de células de um fungu é a forma mais assertiva de determinar a qual espécie o mesmo pertence. Mas, é um método com alto custo e requer um sequenciador genético a disposição. Por isto este trabalho propoe utilizar-se de dados de Espectroscopia Raman das células dos fungos para criar uma modelo de aprendizagem de máquina capaz de identificar a espécie de um fungo.
+
+Nas próximas sessões deste trabalho serão detalhadas a significância do sinal da Espectroscopia Raman para o caso de estudo, técnicas de aprendizado de Máquina como PCA(Principal Component Analysis) e Feature Selection e será proposta uma discussão do porquê estas técnicas podem trazer um valor significante a materia de estudo, além de apresentar os resultados esperados ao fim desta pesquisa.
 
 \section{Revisão da literatura}
 
 \section{Materiais e métodos}
 
-\section{Resultados e discussão}
-
+\section{Discussão e resultados esperados}
 \section{Conclusão}
+
 
 \section*{Reconhecimento}
 
