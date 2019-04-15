@@ -82,23 +82,40 @@ O Reino Fungi é composto pelas mais variadas formas de seres, desde micro-organ
 \begin{figure}[ht]
 \centering
 \includegraphics[width=7.5cm]{fungus_dif}
-\caption{Diferença nas estruturas celulares das espécies fungos fumigatus e nidulans ambos do gênero Aspergillus. Crédito: Lee et al. The Fungal Exopolysaccharide Galactosaminogalactan Mediates Virulence by Enhancing Resistance to Neutrophil Extracellular Traps. PLOS Pathogens, 2015; 11 (10): e1005187}
+\caption{Diferença nas estruturas celulares das espécies fungos fumigatus e nidulans ambos do gênero Aspergillus. Fonte: \cite{Lee2015}}
 \label{fg_exemp1}
 \end{figure}
 
 Realizar o sequênciamento genético de uma amostra de células de um fungu é a forma mais assertiva de determinar a qual espécie o mesmo pertence. Mas, é um método com alto custo e requer um sequenciador genético a disposição. Por isto este trabalho propoe utilizar-se de dados de Espectroscopia Raman das células dos fungos para criar uma modelo de aprendizagem de máquina capaz de identificar a espécie de um fungo.
 
-Nas próximas sessões deste trabalho serão detalhadas a significância do sinal da Espectroscopia Raman para o caso de estudo, técnicas de aprendizado de Máquina como PCA(Principal Component Analysis) e Feature Selection e será proposta uma discussão do porquê estas técnicas podem trazer um valor significante a materia de estudo, além de apresentar os resultados esperados ao fim desta pesquisa.
+Nas próximas sessões deste trabalho serão detalhadas a significância do sinal da Espectroscopia Raman para o caso de estudo, técnicas de aprendizado de Máquina como PCA(Principal Component Analysis), Clusterização e Feature Selection e será proposta uma discussão do porquê estas técnicas podem trazer um valor significante a materia de estudo, além de apresentar os resultados esperados ao fim desta pesquisa.
 
 \section{Revisão da literatura}
+
+Espectroscopia Raman é uma técnica que foi inspirada em um fenômeno observado experimentalmente por Chandrasekhara Venkata Raman. Tal fenômeno consiste no espalhamento da luz em diferentes frequências ao incidir um lâser sobre um material. Essas frequências luminosas se espalham devido a vibração entre as moléculas que foram excitadas pela luz incidida. Para cada molécula diferente uma intensidade luminosa pode ser mensurada, de modo que, a medida obtida revela a identidade da molécula. O conjunto dos valores mensurados, gera uma assinatura que é unica (exemplo na figura \ref{fg_exemp2}, e por isso, capaz de revelar a estrutura molecular do material considerado.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=6.5cm]{assinatura_raman_exemplo}
+\caption{Exemplo de uma assinatura obtida atravês da Espectroscopia Raman. Fonte: \cite{Butler2016}}
+\label{fg_exemp2}
+\end{figure}
+
+Quando se realiza uma medição do espectro Raman, é preparada uma solução aquosa adicionando uma pequena quantidade do material que se deseja analisar e se adiciona um substrato a amostra (geralmente metais nobres) que por sua vez servirão como amplificadores da intensidade luminosa espalhada. A escolha do substrato é parte crucial na obtenção dos dados do espectro Raman conforme \cite{Seifert2016}, pois ruídos podem ser gerados pelo substrato escolhido distorcendo os resultados.
+
+Uma vez obtido os dados referentes ao espectro Raman é comum utilizar ferramental matemático para extrair da assinatura obtida ruídos advindos da fluorescência da composição material da amostra. Tal aspecto pode, por sua vez, mascarar a informação relevante do sinal que em geral é caracterizada por picos.
+
+O PCA(Principal Component Analysis) é uma das ferramentas utilizadas para eliminar os ruídos do espectro Raman. Este método matemático é capaz de identificar em um espaço amostral de n dimensões quais destas carregam informação realmente relevantes para análise. Contudo, a eficiência deste método está no agrupamento de informação em poucas dimensões. Caso exista grande variação entre as componentes das amostras ao considerar apenas as de maior variância, muita informação relevante pode ser perdida comprometendo a análise que deseja-se realizar.
 
 \section{Materiais e métodos}
 
 \section{Discussão e resultados esperados}
+
 \section{Conclusão}
 
-
 \section*{Reconhecimento}
+
+Ao Professor Hugo Vieria Neto, Ph.D. pelo excelente conteúdo ministrado na displina de Metodologia Científica do programa de pós graduação da Universidade Tecnológica Federal do Paraná.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,modref}
