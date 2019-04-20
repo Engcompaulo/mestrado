@@ -76,7 +76,7 @@ A identificação da espécie de um fungo causador de doenças é determinante n
 \end{abstract}
 
 \section{Introdução}
-O Reino Fungi é composto pelas mais variadas formas de seres, desde micro-organismos até cogumelos. Contudo, quando deseja-se diferenciar espécies de mesmo gênero (táxon da classificação biológica) isto torna-se uma tarefa árdua, pois tais diferenças só são perceptíveis nas estruturas celulares destes seres, como pode ser verificado na figura \ref{fungus_dif}.
+O Reino Fungi é composto pelas mais variadas formas de seres, desde microorganismos até cogumelos. Contudo, quando deseja-se diferenciar espécies de mesmo gênero (táxon da classificação biológica) isto torna-se uma tarefa árdua, pois tais diferenças só são perceptíveis nas estruturas celulares destes seres, como pode ser verificado na figura \ref{fungus_dif}.
 
 \begin{figure}[ht]
 \centering
@@ -85,7 +85,7 @@ O Reino Fungi é composto pelas mais variadas formas de seres, desde micro-organ
 \label{fungus_dif}
 \end{figure}
 
-Realizar o sequênciamento genético de uma amostra de células de um fungo é a forma mais assertiva de determinar a qual espécie o mesmo pertence. Mas, é um método com alto custo e requer um sequenciador genético a disposição. Por isto este trabalho propõe a utilização de dados de Espectroscopia Raman das células dos fungos para criar uma modelo de aprendizagem de máquina capaz de identificar a espécie de um fungo.
+Realizar o sequenciamento genético de uma amostra de células de um fungo é a forma mais assertiva de determinar a qual espécie o mesmo pertence. Mas, é um método com alto custo e requer um sequenciador genético a disposição. Por isto este trabalho propõe a utilização de dados de Espectroscopia Raman das células dos fungos para criar uma modelo de aprendizagem de máquina capaz de identificar a espécie de um fungo.
 
 A Espectroscopia Raman é uma técnica que necessita de equipamentos simples para sua execução: microscópio ótico comum, laser de excitação, monocromador e um detector sensível (Figura \ref{esquema_experimento}). E, apesar de simples, ela pode gerar informação de qualidade sobre a composição da amostra que se analisa. Mas interpretar seus resultados é uma tarefa complexa, por isso, utilizar técnicas de aprendizado de máquina podem ajudar a identificar os padrões nos dados do espectro Raman.
 
@@ -114,15 +114,15 @@ O conjunto das frequências luminosas espalhadas compõe uma assinatura que refl
 \begin{figure}[ht]
 \centering
 \includegraphics[width=9.5cm]{assinatura_raman_exemplo}
-\caption{Exemplo de assinaturas obtidas atravês da Espectroscopia Raman. Cada cor reflete uma medição para espécies diferentes de fungos do gênero Trichophyton. Fonte: \cite{Pankin2018}}
+\caption{Exemplo de assinaturas obtidas através da Espectroscopia Raman. Cada cor reflete uma medição para espécies diferentes de fungos do gênero Trichophyton. Fonte: \cite{Pankin2018}}
 \label{assinatura_raman_exemplo}
 \end{figure}
 
 Quando se realiza uma medição do espectro Raman, é preparada uma solução aquosa adicionando uma pequena quantidade do material que se deseja analisar e se adiciona um substrato à amostra (geralmente metais nobres) que por sua vez servirão como amplificadores da intensidade luminosa espalhada. A escolha do substrato é parte crucial na obtenção dos dados do espectro Raman conforme \cite{Seifert2016}, pois ruídos podem ser gerados pelo substrato escolhido distorcendo os resultados.
 
-Uma vez obtidos os dados referentes ao espectro Raman é comum utilizar ferramental matemático para extrair da assinatura obtida ruídos advindos da fluorescência da composição material da amostra. Tal aspecto pode, por sua vez, mascarar a informação relevante do sinal que em geral é caracterizada por picos.
+Uma vez obtidos os dados referentes ao espectro Raman é comum utilizar ferramental matemático para extrair da assinatura obtida ruídos e distorções resultantes da fluorescência da composição material da amostra. Tais correções são aplicadas de forma a evidenciar as informações relevantes do sinal que em geral é caracterizada por picos.
 
-O PCA é uma das ferramentas utilizadas para eliminar os ruídos do espectro Raman. Este método matemático é capaz de identificar em um espaço amostral de n dimensões quais destas carregam informação realmente relevantes para análise. Contudo, a eficiência deste método está no agrupamento de informação em poucas dimensões. Caso exista grande variação entre várias das componentes das amostras, ao considerar apenas as de maior variância, muita informação relevante pode ser perdida comprometendo a análise que se deseja realizar \cite{Brereton2017}. Por isso plotar as relações entre as componentes de maior variância pode ter grande valor analítico, pois se a significância não estiver sendo perdida padrões de agrupamento poderão ser visualizados. A Figura \ref{pca_exemplo} demonstra o surgimento destes padrões de agrupamento na análise de amostras de pólen realizadas em \cite{Seifert2016}.
+O PCA é uma das ferramentas utilizadas para eliminar os ruídos do espectro Raman. Este método matemático é capaz de identificar em um espaço amostral de n dimensões quais destas carregam informações realmente relevantes para análise. Contudo, a eficiência deste método está no agrupamento de informação em poucas dimensões. Caso exista grande variação entre várias das componentes das amostras, ao considerar apenas as de maior variância, muita informação relevante pode ser perdida comprometendo a análise que se deseja realizar \cite{Brereton2017}. Por isso plotar as relações entre as componentes de maior variância pode ter grande valor analítico, pois se a significância não estiver sendo perdida padrões de agrupamento poderão ser visualizados. A Figura \ref{pca_exemplo} demonstra o surgimento destes padrões de agrupamento na análise de amostras de pólen realizadas em \cite{Seifert2016}.
 
 \begin{figure}[ht]
 \centering
@@ -131,17 +131,17 @@ O PCA é uma das ferramentas utilizadas para eliminar os ruídos do espectro Ram
 \label{pca_exemplo}
 \end{figure}
 
-Entretanto, para materias biológicos, distinguir tais agrupamentos pode ser desafiador. Segundo \cite{Seifert2016} a utilizações de redes neurais artificias pode trazer grandes vantagens para este tipo de análise, tendo resultados melhores do que com outras estratégias como SVM(Support Vector Machines).
+Entretanto, para materiais biológicos, distinguir tais agrupamentos pode ser desafiador. Segundo \cite{Seifert2016} a utilização de redes neurais artificiais pode trazer grandes vantagens para este tipo de análise, tendo resultados melhores do que com outras estratégias como SVM(Support Vector Machines).
 
-As Redes Neurais Artificias são uma técnica que procura simular o funcionamento do cérebro humano. São formadas por conjuntos de neurônios que são estruturas que avaliam atravês de uma função de ativação as entradas resultando uma saída. Estas saídas podem ser submetidas a outros neurônios sucessivamente de forma que a mensagem possa ser trafegada por várias camadas. A disposições dos neurônios define a arquitetura da rede neural, de forma que, diferentes configurações podem trazer diversos benefícios. Uma vez que a mensagem tenha trafegado por todas as camadas o saída final deve corresponder a resposta para a questão analisada.
+As Redes Neurais Artificiais são uma técnica que procura simular o funcionamento do cérebro humano. São formadas por conjuntos de neurônios que são estruturas que avaliam através de uma função de ativação as entradas resultando uma saída. Estas saídas podem ser submetidas a outros neurônios sucessivamente de forma que a mensagem possa ser trafegada por várias camadas. A disposições dos neurônios define a arquitetura da rede neural, de forma que, diferentes configurações podem trazer diversos benefícios. Uma vez que a mensagem tenha trafegado por todas as camadas a saída final deve corresponder a resposta para a questão analisada.
 
-Para cada entrada de um neurônio é atribuído um peso, que deve ser calibrado de forma a obter uma saida esperada. Na aprendizagem supervisionada, esse processo de calibração dos pesos é comumente chamado de treinamento da rede neural. Em que é informado a rede para determinadas entradas qual o resultado esperado, deste modo, a rede consegue determinar quais os melhores pesos a utilizar em seus neurônios. Assim, em uma execução posterior para um conjunto de entradas a rede será capaz de inferir um resultado. A determinação dos pesos dá-se por um processo iterativo de propagação de erros denominado back propagation, em que, cada iteração define um delta que deve ser acrescido ao peso para minimizar o erro em relação ao valor esperado na saída. Por isso, é comum que se utilize das amostras disponíveis 80\% para realizar o treinamento e 20\% para validar se o treinamento realizado gerou resultavo efetivo. 
+Para cada entrada de um neurônio é atribuído um peso, que deve ser calibrado de forma a obter uma saída esperada. Na aprendizagem supervisionada, esse processo de calibração dos pesos é comumente chamado de treinamento da rede neural. Em que é informado a rede para determinadas entradas qual o resultado esperado, deste modo, a rede consegue determinar quais os melhores pesos a utilizar em seus neurônios. Assim, em uma execução posterior para um conjunto de entradas a rede será capaz de inferir um resultado. A determinação dos pesos dá-se por um processo iterativo de propagação de erros denominado back propagation, em que, cada iteração define um delta que deve ser acrescido ao peso para minimizar o erro em relação ao valor esperado na saída. Por isso, é comum que se utilize das amostras disponíveis 80\% para realizar o treinamento e 20\% para validar se o treinamento realizado gerou resultado efetivo. 
 
 Dentre as principais aplicações de uma Rede Neural Artificial pode-se citar: aproximação de funções, previsão de séries temporais, classificações e reconhecimento de padrões.
 
 \section{Materiais e métodos}
 
-Para a realização deste trabalho, dados do espectro Raman serão fornecido em arquivos de formato txt. Tais dados correspodem as amostras de variadas espécies de fungos que serão obtidas e preparadas adequadamente para a Espectropia Raman pelos pesquisadores que fazem parte desse grupo de pesquisa. No arquivo txt estarão contidas duas colunas, a primeira com a médida em $cm^{-1}$ referente a frequência luminosa e a segunda com a medida em unidade arbitrária da intensidade luminosa. A quantidade de linhas geradas reflete a calibragem definida no aparelho de microscopia que realiza a coleta do dados do espectro.
+Para a realização deste trabalho, dados do espectro Raman serão fornecidos em arquivos de formato txt. Tais dados correspondem às amostras de variadas espécies de fungos que serão obtidas e preparadas adequadamente para a Espectroscopia Raman pelos pesquisadores que fazem parte desse grupo de pesquisa. No arquivo txt estarão contidas duas colunas, a primeira com a medida em $cm^{-1}$ referente à frequência luminosa e a segunda com a medida em unidade arbitrária da intensidade luminosa. A quantidade de linhas geradas reflete a calibragem definida na aparelhagem de microscopia que realiza a coleta do dados do espectro.
 
 Para cada espécie serão fornecidos 10 arquivos com informações de diferentes medições do espectro Raman para um mesmo fungo. Espera-se analisar 2 gêneros de fungos compostos por duas espécies diferentes cada um. O primeiro gênero a ser analisado é o Candida, de forma a validar o conceito formulado para identificação de fungos já que, neste caso, existe uma base de conhecimento mais difundido na literatura sobre os valores e formas de interpretação do espectro Raman. O segundo gênero a ser analisado é o Fonsecaea, em que, deseja-se diferenciar duas as espécies pedrosoi e pugnacius (Figura \ref{pedrosoi_pugnacius}).
 
@@ -169,15 +169,21 @@ Para que o PCA exerça sua função da forma esperada, são necessários aplicar
 
 Quanto a arquitetura da rede neural artificial, diferentes configurações podem ser experimentadas de forma a identificar qual atinge o melhor resultado consumindo o menor quantidade de recursos computacionais.
 
-Ao fim dessa pesquisa espera-se obter duas redes neurais artificiais treinadas capazes de a partir do dados do espectro Raman de um fungo identificar a qual espécie ele pertence. Contudo, elas não serão genéricas, elas serão aptas a distinguir espécies entre gêneros iguais. Então a primeira rede neural artificial será capaz de distiguir espécies de fungos do gênero Candida e a segunda distinguir espécies do gênero Fonsecaea. 
+Ao fim dessa pesquisa espera-se obter duas redes neurais artificiais treinadas capazes de a partir do dados do espectro Raman de um fungo identificar a qual espécie ele pertence. Contudo, elas não serão genéricas, elas serão aptas a distinguir espécies entre gêneros iguais. Então a primeira rede neural artificial será capaz de distinguir espécies de fungos do gênero Candida e a segunda distinguir espécies do gênero Fonsecaea. 
 
 \section{Conclusão}
  
+O espectro Raman produz informações de qualidade sobre a composição molecular de amostras biológicas. Contudo, tais informações precisam ser tratadas e analisadas minuciosamente de forma a evidenciar esse valor. Utilizar técnicas de aprendizado de máquina pode tornar essa análise mais fácil, uma vez que, as redes neurais artificias tem por aplicação identificar padrões muitas vezes invisíveis ao olhos humanos.
+
 A relevância deste trabalho dar-se-á pela possibilidade criar um método de identificação de espécies de fungos mais simples do que o sequenciamento genético. Impactando a velocidade e diminuindo os custos na obtenção de diagnósticos por infecções/alergias fúngicas. 
+
+Além disso visualiza o pontencial de associar a rede neural artificial um processo de Feature Selection para trazer a compreensão de quais picos da assinatura do espectro Raman são de fato relevantes na identificação de um fungo. Deste modo, isso elevaria a compreensão de pesquisadores fornecendo uma interpretação mais assertiva no estudo de espectro Raman de amostras biológicas.
+
+Por fim, espera-se também contribuir com a difusão do conhecimento sobre Espectroscopia Raman, bem como, sobre a aplicabilidade de técnicas de Aprendizado de Máquinas nas mais diversas áreas de análises de dados.
 
 \section*{Reconhecimento}
 
-Ao Professor Hugo Vieria Neto, Ph.D. pelas aulas ministradas na displina de Metodologia Científica do programa de pós graduação da Universidade Tecnológica Federal do Paraná.
+Ao Professor Hugo Vieria Neto, Ph.D. pelas aulas ministradas na disciplina de Metodologia Científica do programa de pós graduação da Universidade Tecnológica Federal do Paraná.
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,modref}
