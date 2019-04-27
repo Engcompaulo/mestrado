@@ -32,9 +32,8 @@ def main():
                             random_state=32,
                             learning_rate_init=0.001)
     mlp.fit(X_train, y_train)
-    score_treino = round(mlp.score(X_train, y_train),2)
     score_test = round(mlp.score(X_test, y_test),2)
-    print('ACERTOU: {}% | ERROU: {}%'.format(mlp.score(X_test, y_test)*100,100 - mlp.score(X_test, y_test)*100))
+    print('ACERTOU: {}% | ERROU: {}%'.format(score_test*100,100 - score_test*100))
 
 if __name__ == "__main__":
     main()

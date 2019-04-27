@@ -41,40 +41,40 @@ def generate_uniform_mf():
     vmin = min(variance)
 
     std = np.std(variance_data)
-    qtd = vmax/std
+    qtd = (vmax-vmin)/std
 
-    var_lo = fuzz.trimf(variance, [vmin, vmin + qtd*0.25*std, vmin + qtd*0.50*std])
-    var_me = fuzz.trimf(variance, [vmin + qtd*0.25*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
+    var_lo = fuzz.trimf(variance, [vmin, vmin + qtd*0.15*std, vmin + qtd*0.30*std])
+    var_me = fuzz.trimf(variance, [vmin + qtd*0.15*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
     var_hi = fuzz.trimf(variance, [vmin + qtd*0.70*std, vmin + qtd*0.85*std, vmax])
 
     vmax = max(skewness)
     vmin = min(skewness)
 
     std = np.std(skewness_data)
-    qtd = vmax/std
+    qtd = (vmax-vmin)/std
 
-    ske_lo = fuzz.trimf(skewness, [vmin, vmin + qtd*0.25*std, vmin + qtd*0.50*std])
-    ske_me = fuzz.trimf(skewness, [vmin + qtd*0.25*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
+    ske_lo = fuzz.trimf(skewness, [vmin, vmin + qtd*0.15*std, vmin + qtd*0.30*std])
+    ske_me = fuzz.trimf(skewness, [vmin + qtd*0.15*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
     ske_hi = fuzz.trimf(skewness, [vmin + qtd*0.70*std, vmin + qtd*0.85*std, vmax])
 
     vmax = max(curtosis)
     vmin = min(curtosis)
     
     std = np.std(curtosis_data)
-    qtd = vmax/std
+    qtd = (vmax-vmin)/std
 
-    cur_lo = fuzz.trimf(curtosis, [vmin, vmin + qtd*0.25*std, vmin + qtd*0.50*std])
-    cur_me = fuzz.trimf(curtosis, [vmin + qtd*0.25*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
+    cur_lo = fuzz.trimf(curtosis, [vmin, vmin + qtd*0.15*std, vmin + qtd*0.30*std])
+    cur_me = fuzz.trimf(curtosis, [vmin + qtd*0.15*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
     cur_hi = fuzz.trimf(curtosis, [vmin + qtd*0.70*std, vmin + qtd*0.85*std, vmax])
 
     vmax = max(entropy)
     vmin = min(entropy)
     
     std = np.std(entropy_data)
-    qtd = vmax/std
+    qtd = (vmax-vmin)/std
 
-    ent_lo = fuzz.trimf(entropy, [vmin, vmin + qtd*0.25*std, vmin + qtd*0.50*std])
-    ent_me = fuzz.trimf(entropy, [vmin + qtd*0.25*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
+    ent_lo = fuzz.trimf(entropy, [vmin, vmin + qtd*0.15*std, vmin + qtd*0.30*std])
+    ent_me = fuzz.trimf(entropy, [vmin + qtd*0.15*std, vmin + qtd*0.50*std, vmin + qtd*0.85*std])
     ent_hi = fuzz.trimf(entropy, [vmin + qtd*0.70*std, vmin + qtd*0.85*std, vmax])
 
     return (variance, skewness, curtosis, entropy, classif,
@@ -169,7 +169,7 @@ def fuzzify(rules, activations, classif):
         var, ske, cur, ent = r       
         active_rule = max(activations[var], activations[ske], activations[cur], activations[ent])
         if(v[1] == 0):
-            output_ativations.append(np.fmin(active_rule, fuzz.trimf(classif, [0, 0.5, 0.75])))
+            output_ativations.append(np.fmin(active_rule, fuzz.trimf(classif, [0, 0.3, 0.6])))
         else:
             output_ativations.append(np.fmin(active_rule, fuzz.trimf(classif, [0.5, 0.75, 1])))
 
@@ -203,7 +203,7 @@ def main():
     cur_lo, cur_me, cur_hi, 
     ent_lo, ent_me, ent_hi) = generate_uniform_mf()
 
-    fig, (ax0, ax1, ax2, ax3) = plt.subplots(nrows=4, figsize=(12, 10))
+    fig, (ax0, ax1, ax2, ax3, ax4) = plt.subplots(nrows=5, figsize=(12, 10))
 
     ax0.plot(variance, var_lo, 'b', linewidth=1.5, label='Baixa')
     ax0.plot(variance, var_me, 'g', linewidth=1.5, label='Média')
@@ -228,6 +228,11 @@ def main():
     ax3.plot(entropy, ent_hi, 'y', linewidth=1.5, label='Alta')
     ax3.set_title('Entropy')
     ax3.legend(loc=5)
+
+    ax4.plot(classif, fuzz.trimf(classif, [0, 0.3, 0.6]), 'b', linewidth=1.5, label='Falsa')
+    ax4.plot(classif, fuzz.trimf(classif, [0.5, 0.75, 1]), 'y', linewidth=1.5, label='Verdadeira')
+    ax4.set_title('Classification')
+    ax4.legend(loc=5)
 
     for ax in (ax0, ax1, ax2, ax3):
         ax.spines['top'].set_visible(False)
@@ -258,7 +263,7 @@ def main():
                                 cur_lo, cur_me, cur_hi, 
                                 ent_lo, ent_me, ent_hi)
         output_ativations = fuzzify(rules, activations, classif)
-        class_value = 1 if defuzzify(output_ativations, classif) >= 0.7 else 0 
+        class_value = 1 if defuzzify(output_ativations, classif) >= 0.6 else 0 
         if(class_value==data[4]):
             acertos += 1
         else:
