@@ -26,10 +26,8 @@ def main():
 
     mlp = MLPClassifier(hidden_layer_sizes=(4, 1),
                             activation = 'relu', 
-                            solver='sgd', 
-                            verbose=False, 
-                            tol=1e-4, 
-                            random_state=32,
+                            solver='sgd',
+                            random_state=16,
                             learning_rate_init=0.001)
     mlp.fit(X_train, y_train)
     score_test = round(mlp.score(X_test, y_test),2)
