@@ -24,7 +24,7 @@ def main():
 
     X_train, y_train, X_test, y_test = generate_train_test_data()
 
-    mlp = MLPClassifier(hidden_layer_sizes=(4, 1),
+    mlp = MLPClassifier(hidden_layer_sizes=(40, 10),
                             activation = 'relu', 
                             solver='sgd',
                             random_state=16,
