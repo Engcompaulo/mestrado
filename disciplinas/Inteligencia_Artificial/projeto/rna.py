@@ -6,8 +6,6 @@ from sklearn.neural_network import MLPClassifier
 from os import listdir
 from os.path import isfile, join
 
-TRAIN_SIZE = 0.8 
-
 def generate_train_test_data():    
 
     data_training_files = [f for f in listdir('./data_training') if isfile(join('./data_training', f))]
@@ -41,7 +39,7 @@ def main():
 
     x_train, y_train, x_test, y_test = generate_train_test_data()
 
-    mlp = MLPClassifier(hidden_layer_sizes=(5, 3),
+    mlp = MLPClassifier(hidden_layer_sizes=(1024, 10),
                             activation = 'relu', 
                             solver='sgd',
                             random_state=16,
