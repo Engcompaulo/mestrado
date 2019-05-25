@@ -1,0 +1,67 @@
+% cec2003.sty, adapted from cec1999.sty, 22 January, 2003
+%
+% Style file for the
+% 2003 Congress on Evolutionary Computation
+%
+% Prepared by Lisa Lees for Dr. Bill Punch, adapted by Bob McKay for A4
+% lees@msu.edu           punch@cse.msu.edu
+% b.mckay@adfa.edu.au
+%
+% Department of Computer Science
+% www.cs.adfa.edu.au
+%%
+\def\fileversion{1.0}
+\def\filedate{2003/06/20}
+% \NeedsTeXFormat{LaTeX2e}
+% \ProvidesPackage{cec2003}[\filedate\space\fileversion\space
+% Congress on Evolutionary Computation]
+%
+\setlength{\columnsep}{15mm}
+\setlength{\evensidemargin}{25mm}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\footnotesep}{9pt}
+\setlength{\footskip}{0pt}
+\setlength{\hoffset}{-0.27in} %% CHANGE THIS FOR YOUR PRINTER
+\setlength{\itemsep}{0pt}
+\setlength{\oddsidemargin}{0in}
+\setlength{\parindent}{0.175in}
+\setlength{\parsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\textheight}{248.0mm}
+\setlength{\textwidth}{172mm}
+\setlength{\topmargin}{0in} %% CHANGE THIS FOR YOUR PRINTER
+\setlength{\topsep}{0pt}
+%
+\renewcommand{\title}[1]{\begin{center}\textbf{\Large{#1}}\end{center}}
+\renewcommand\refname{Bibliography}
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.0ex \@plus -1ex \@minus -.2ex}%
+                                   {2.0ex \@plus.2ex}%
+                                   {\normalfont\large\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-2.90ex\@plus -1ex \@minus -.2ex}%
+                                     {1.4ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-2.90ex\@plus -1ex \@minus -.2ex}%
+                                     {1.4ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname \hskip0.3em\relax}
+\renewcommand{\footnoterule}{\kern-2\p@
+ \hrule \@width 2in \kern 5\p@}
+
+%
+\renewenvironment{abstract}[1][Abstract- ]{\noindent\bfseries{#1}}{}
+%
+\newenvironment{ceclist}
+{\begin{list}{$\bullet$}
+ {\setlength{\topsep}{1.5pt}
+  \setlength{\itemsep}{1.5pt}
+  \setlength{\parsep}{1.5pt}}}
+ {\end{list}}
+
+\endinput
+%
+% End of cec2003.sty
