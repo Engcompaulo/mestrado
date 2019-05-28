@@ -1,6 +1,7 @@
 import numpy as np
 import re
 import pandas as pd
+import matplotlib.pyplot as plt
 from scipy import sparse
 from scipy.sparse.linalg import spsolve
 from sklearn import decomposition
@@ -67,11 +68,18 @@ def main():
     mlp = MLPClassifier(hidden_layer_sizes=(2, 1),
                             activation = 'relu', 
                             solver='sgd',
-                            random_state=16,
-                            learning_rate_init=0.01)
+                            verbose=True,
+                            random_state=0,
+                            learning_rate_init=0.1)
     mlp.fit(pca_x_train, y_train)
     score_test = round(mlp.score(pca_x_test, y_test),2)
     print('ACERTOU: {}% | ERROU: {}%'.format(score_test*100,100 - score_test*100))
+
+    fig = plt.figure(figsize = (8,8))
+    ax = fig.add_subplot(1,1,1)
+    ax.set_title('Loss Evolution', fontsize = 20)
+    ax.plot(mlp.loss_curve_, label='Loss Evolution')
+    plt.show()
 
 if __name__ == "__main__":
     main()

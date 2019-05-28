@@ -62,6 +62,7 @@ def main():
     pca = decomposition.PCA(n_components=2)
     pca.fit(x_train)
     pca_x_train = pca.transform(x_train)
+    print(pca.explained_variance_ratio_)
 
     principalDf = pd.DataFrame(data = pca_x_train, columns = ['principal component 1', 'principal component 2'])
     resultDf = pd.DataFrame(data = y_train, columns = ['target'])
