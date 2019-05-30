@@ -69,6 +69,8 @@ def main():
                             activation = 'relu', 
                             solver='sgd',
                             verbose=True,
+                            max_iter=200,
+                            tol=1e-4,
                             random_state=0,
                             learning_rate_init=0.1)
     mlp.fit(pca_x_train, y_train)
@@ -78,7 +80,10 @@ def main():
     fig = plt.figure(figsize = (8,8))
     ax = fig.add_subplot(1,1,1)
     ax.set_title('Loss Evolution', fontsize = 20)
+    ax.set_xlabel('Quantidade de Iterações', fontsize = 15)
+    ax.set_ylabel('Loss', fontsize = 15)
     ax.plot(mlp.loss_curve_, label='Loss Evolution')
+    ax.grid()
     plt.show()
 
 if __name__ == "__main__":
