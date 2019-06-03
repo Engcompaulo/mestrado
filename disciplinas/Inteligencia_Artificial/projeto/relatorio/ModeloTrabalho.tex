@@ -1,101 +1,90 @@
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 
 \makeatletter \providecommand{\tabularnewline}{\\}
 
 \usepackage{cec2003,multicol,times}
-%\usepackage{epsfig}
 \usepackage{graphicx}
 \usepackage{hyphenat}
 \usepackage{indentfirst}
 \usepackage{babel}
-%\usepackage{eufrak}
-%\usepackage{psfrag}
 \makeatother
+
 \begin{document}
 
-\pagestyle{empty} \sloppy \twocolumn[
-\title{TÕTULO DO TRABALHO}
-\begin{multicols}{2}
+\pagestyle{empty} 
+\sloppy
+\twocolumn[
+\title{An√°lise do Espectro Raman de amostras de cacha√ßa atrav√©s de PCA e Redes Neurais Artificiais\\\vspace{0.5cm}}
 \begin{center}
-\textbf{Autor 1} \\
+\textbf{Daniel S. Costa} \\
 UTFPR\\
 Av. Sete de Setembro, 3165 \\
-80230-901 Curitiba, Brazil \\
-email \\\vspace{2cm}
+80230-901 Curitiba, Brazil \\\vspace{0.5cm}
 \end{center}
-\begin{center}
-\textbf{Autor 2} \\
- UTFPR\\
-Av. Sete de Setembro, 3165 \\
-80230-901 Curitiba, Brazil \\
-email \\\vspace{2cm}
-\end{center}
-\end{multicols}
 ]
 
-
 \begin{abstract}
-O trabalho dever· ser em duas colunas de acordo com o modelo Latex aqui
-apresentado (neste caso dever· ser limitado a 6 p·ginas) ou gerado
-via outro editor (no caso de coluna simples limitado a 12 p·ginas).
-Sugestıes para as seÁıes
-est„o  listadas a seguir. \vspace{2cm}
+O trabalho dever√° ser em duas colunas de acordo com o modelo Latex aqui
+apresentado (neste caso dever√° ser limitado a 6 p√°ginas) ou gerado
+via outro editor (no caso de coluna simples limitado a 12 p√°ginas).
+Sugest√µes para as se√ß√µes
+est√£o  listadas a seguir. \vspace{2cm}
 \end{abstract}
 
-\section{IntroduÁ„o}
+\section{Introdu√ß√£o}
 \vspace{1cm}
- Breve introduÁ„o posicionando  o tema da pesquisa.
-Identifique o contexto geral no qual o problema ou as questıes da
+ Breve introdu√ß√£o posicionando  o tema da pesquisa.
+Identifique o contexto geral no qual o problema ou as quest√µes da
 pesquisa que foram identificadas. \vspace{1cm}
 
 
 
-Para quem vai propor uma reproduÁ„o de resultados de referÍncia da literatura, esta
-seÁ„o dever· citar o artigo no qual o trabalho se baseia mas dever· ser diferente
+Para quem vai propor uma reprodu√ß√£o de resultados de refer√™ncia da literatura, esta
+se√ß√£o dever√° citar o artigo no qual o trabalho se baseia mas dever√° ser diferente
 do texto base.
 
-\subsection{DescriÁ„o do Problema}
-\vspace{1cm} O que ser· pesquisado? O que se vai fazer?
+\subsection{Descri√ß√£o do Problema}
+\vspace{1cm} O que ser√° pesquisado? O que se vai fazer?
 %\vspace{2cm}
-\subsection{MotivaÁ„o}
+\subsection{Motiva√ß√£o}
 \vspace{1cm} Por que se deseja fazer a pesquisa? \vspace{1cm}
 
-Identifique os argumentos que justifiquem que a sua pesquisa È
+Identifique os argumentos que justifiquem que a sua pesquisa √©
 significativa, importante e/ou relevante. %\vspace{2cm}
 
-\section{Revis„o da Literatura}
-\subsection{DescriÁ„o da tÈcnica utilizada}
-incluir nesta subseÁ„o uma descriÁ„o dos conceitos da(s) tÈcnica(s)
-que ser„o utilizados no seu trabalho.
+\section{Revis√£o da Literatura}
+\subsection{Descri√ß√£o da t√©cnica utilizada}
+incluir nesta subse√ß√£o uma descri√ß√£o dos conceitos da(s) t√©cnica(s)
+que ser√£o utilizados no seu trabalho.
 
-\subsection{DescriÁ„o das abordagens relacionadas}
-\vspace{1cm} Mostrar o enfoque recebido pelo tema j· publicado na
+\subsection{Descri√ß√£o das abordagens relacionadas}
+\vspace{1cm} Mostrar o enfoque recebido pelo tema j√° publicado na
 literatura. \vspace{1cm}
 
-An·lise comentada do que j· foi escrito sobre o tema procurando
+An√°lise comentada do que j√° foi escrito sobre o tema procurando
 mostrar os enfoques convergentes e divergentes dos diversos
 autores. \vspace{1cm}
 
-Para quem vai propor uma reproduÁ„o de resultados de referÍncia da literatura, esta
-seÁ„o dever· citar o artigo no qual o trabalho se baseia mas dever· ser diferente
+Para quem vai propor uma reprodu√ß√£o de resultados de refer√™ncia da literatura, esta
+se√ß√£o dever√° citar o artigo no qual o trabalho se baseia mas dever√° ser diferente
 do texto base.
-Exemplo de citaÁ„o das referÍncias
-bibliogr·ficas~\cite{Russell:2003,Pedrycz:2007,haykin2001redes,Braga:2007}.
+Exemplo de cita√ß√£o das refer√™ncias
+bibliogr√°ficas~\cite{Russell:2003,Pedrycz:2007,haykin2001redes,Braga:2007}.
 \vspace{2cm}
 \section{Metodologia}
 \vspace{1cm} Como sera realizada a pesquisa? \vspace{1cm}
 
 Descrever detalhadamente a abordagem proposta. \vspace{2cm}
-\section{SimulaÁıes e Resultados}
-\vspace{1cm} … interessante que a abordagem possa ser simulada e
-os resultados sejam apresentados nesta seÁ„o. Neste caso, o modelo
-simulado baseado em uma tÈcnica de IA deve ser avaliado e, se for o caso,
-comparado com outro modelo, para verificar se h· vantagem no uso
-da tÈcnica. \vspace{2cm}
-\section{Conclusıes}
-\vspace{1cm} Esta seÁ„o dever· trazer as conclusıes a respeito da
+\section{Simula√ß√µes e Resultados}
+\vspace{1cm} √â interessante que a abordagem possa ser simulada e
+os resultados sejam apresentados nesta se√ß√£o. Neste caso, o modelo
+simulado baseado em uma t√©cnica de IA deve ser avaliado e, se for o caso,
+comparado com outro modelo, para verificar se h√° vantagem no uso
+da t√©cnica. \vspace{2cm}
+\section{Conclus√µes}
+\vspace{1cm} Esta se√ß√£o dever√° trazer as conclus√µes a respeito da
 abordagem e resultados obtidos. \vspace{2cm}
 
 \bibliographystyle{WCCI}
