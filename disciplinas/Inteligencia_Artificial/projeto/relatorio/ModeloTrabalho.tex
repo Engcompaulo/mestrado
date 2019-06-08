@@ -26,21 +26,28 @@ Av. Sete de Setembro, 3165 \\
 ]
 
 \begin{abstract}
-O presente trabalho valida a utilização de redes neurais artificiais na interpretação de dados do espectro Raman de amostras de cachaça. Combinando a modelagem a técnica PCA(Principal Component Analysis) de forma a maximizar a taxa de sucesso obtida. \vspace{0.5cm}
+O presente trabalho valida a utilização de redes neurais artificiais na interpretação de dados do espectro Raman de amostras de cachaça. Combinando a modelagem a técnica PCA(Principal Component Analysis) de forma a maximizar a taxa de sucesso obtida. \vspace{2cm}
 \end{abstract}
 
 \section{Introdução}
-Este trabalho baseia-se no artigo \cite{DeGoes2016} em que o espectro Raman de amostras de cachaças são submetidas a técnica PCA(Principal Component Analysis) de forma a separar as principais componentes da assinatura Raman tornando possível a visualização clusterizada de amostras contaminados por metanol ou não. \vspace{0.5cm}
+\vspace{1cm} 
+Este trabalho baseia-se no artigo \cite{DeGoes2016} em que o espectro Raman de amostras de cachaças são submetidas a técnica PCA(Principal Component Analysis) de forma a separar as principais componentes da assinatura Raman tornando possível a visualização clusterizada de amostras contaminados por metanol ou não.
 
+De forma complementar ao artigo citado, uma rede neural artificial foi treinada buscando obter a mesma classificação obtida pela técnica do PCA. Contudo, o número de amostras para o treinamento da rede é pequeno, sobretudo quando leva-se em consideração a quantidade de features que são 1024. Assim, observou-se que a rede neural não obteve a assertividade esperada, mesmo testando diferentes quantidade de neurônios na camada escondida da rede.
+
+Outra abordagem adotada foi submeter as amostras ao PCA, e submeter os valores resultantes das 2 principais componentes a rede neural. Deste modo, o teste obteve uma taxa de sucesso de 80%.
+
+Através dos experimentos realizados pode-se concluir que para uma grande quantidade de features e poucas amostras, a rede neural utilizada é ineficaz na classificação dos dados. Uma vez obtida as principais componentes da amostra através do PCA, a classificação se torna possível por conta da diminuição da quantidade de features avaliadas.
+
+\vspace{2cm}
 \subsection{Descrição do Problema}
-\vspace{1cm} O que será pesquisado? O que se vai fazer?
-%\vspace{2cm}
+\vspace{1cm} A Espectroscopia Raman é um técnica capaz de revelar importantes informações sobre a composição de um material analisado. Podendo, até mesmo, ser utilizado na classificação biológica, uma vez que, células de diferentes organismos apresentam diferentes composições químicas.
+Contudo a interpretação da assinatura gerado pela medição do espectro Raman pode ser uma tarefa desafiadora, uma vez que determinar quais os picos da curva são relevantes na distinção de uma material de outro requer treinamento e experiência por parte de quem analisa tal assinatura.
+
 \subsection{Motivação}
-\vspace{1cm} Por que se deseja fazer a pesquisa? \vspace{1cm}
+\vspace{1cm} Criar metodologias e automatizações na análise do dados da espectroscopia Raman pode vir a facilitar o processo de identificação e classificação de materias ou seres vivos. O que se mostra relevantes na busca de contaminantes em um produto ou até mesmo na identificação de uma bactéria/fungo num processo infeccioso.
 
-Identifique os argumentos que justifiquem que a sua pesquisa é
-significativa, importante e/ou relevante. %\vspace{2cm}
-
+\vspace{2cm}
 \section{Revisão da Literatura}
 \subsection{Descrição da técnica utilizada}
 incluir nesta subseção uma descrição dos conceitos da(s) técnica(s)
