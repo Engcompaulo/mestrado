@@ -7,6 +7,7 @@
 \usepackage{cec2003,multicol,times}
 \usepackage{graphicx}
 \usepackage{hyphenat}
+\usepackage{hyperref}
 \usepackage{indentfirst}
 \usepackage[english]{babel}
 \makeatother
@@ -35,7 +36,9 @@ Este trabalho baseia-se no artigo [1] em que o espectro Raman de amostras de cac
 
 De forma complementar ao artigo citado, uma rede neural artificial foi treinada buscando obter a mesma classificação obtida pela técnica do PCA. Contudo, o número de amostras para o treinamento da rede é pequeno, sobretudo quando leva-se em consideração a quantidade de features que são 1024. Assim, observou-se que a rede neural não obteve a assertividade esperada, mesmo testando diferentes quantidade de neurônios na camada escondida da rede.
 
-Outra abordagem adotada foi submeter as amostras ao PCA, e submeter os valores resultantes das 2 principais componentes a rede neural. Deste modo, o teste obteve uma taxa de sucesso de 80%.
+Outra abordagem adotada foi submeter as amostras ao PCA, e submeter os valores resultantes das 2 principais componentes a rede neural. Deste modo, o teste obteve uma taxa de sucesso de 80\%.
+
+Os arquivos das amostras, bem como o código fonte da aplicação e relatórios elaborados estão disponíveis através deste \href{https://github.com/danielscosta/mestrado/tree/master/disciplinas/Inteligencia_Artificial/projeto}{link}.
 
 Através dos experimentos realizados pode-se concluir que para uma grande quantidade de features e poucas amostras, a rede neural utilizada é ineficaz na classificação dos dados. Uma vez obtida as principais componentes da amostra através do PCA, a classificação se torna possível por conta da diminuição da quantidade de features avaliadas.
 
@@ -50,8 +53,9 @@ Contudo a interpretação da assinatura gerado pela medição do espectro Raman 
 \vspace{2cm}
 \section{Revisão da Literatura}
 \subsection{Descrição da técnica utilizada}
-incluir nesta subseção uma descrição dos conceitos da(s) técnica(s)
-que serão utilizados no seu trabalho.
+As redes neurais artificiais possuem vastas arquiteturas. As disposições de suas camadas e como os neurônios se ligam vão determinar para qual tipo de problema aquela configuração melhor se aplica. Neste trabalho, optou-se por utilizar multilayer perceptron com o propósito de classificar amostras com teor de Metanol superior a 10\%.\vspace{4cm}
+
+Outra técnica utilizada para este trabalho foi o PCA - Principal Component Analysis. Que realiza um transformada matemática através da features das amostras de forma a criar um novo espaço amostral em que a significância de cada feature é mensurada. Feito isto, optou-se por trabalhar com as 2 componentes de maior significância (96\% e 2\%) como inputs uma rede neural multilayer perceptron.
 
 \subsection{Descrição das abordagens relacionadas}
 \vspace{1cm} Mostrar o enfoque recebido pelo tema já publicado na
