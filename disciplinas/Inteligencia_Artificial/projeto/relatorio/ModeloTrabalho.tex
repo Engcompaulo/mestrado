@@ -1,4 +1,4 @@
-\documentclass[english]{article}
+\documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{hyphenat}
 \usepackage{indentfirst}
-\usepackage{babel}
+\usepackage[english]{babel}
 \makeatother
 
 \begin{document}
@@ -31,7 +31,7 @@ O presente trabalho valida a utilização de redes neurais artificiais na interp
 
 \section{Introdução}
 \vspace{1cm} 
-Este trabalho baseia-se no artigo \cite{DeGoes2016} em que o espectro Raman de amostras de cachaças são submetidas a técnica PCA(Principal Component Analysis) de forma a separar as principais componentes da assinatura Raman tornando possível a visualização clusterizada de amostras contaminados por metanol ou não.
+Este trabalho baseia-se no artigo [1] em que o espectro Raman de amostras de cachaças são submetidas a técnica PCA(Principal Component Analysis) de forma a separar as principais componentes da assinatura Raman tornando possível a visualização clusterizada de amostras contaminados por metanol ou não.
 
 De forma complementar ao artigo citado, uma rede neural artificial foi treinada buscando obter a mesma classificação obtida pela técnica do PCA. Contudo, o número de amostras para o treinamento da rede é pequeno, sobretudo quando leva-se em consideração a quantidade de features que são 1024. Assim, observou-se que a rede neural não obteve a assertividade esperada, mesmo testando diferentes quantidade de neurônios na camada escondida da rede.
 
@@ -65,7 +65,7 @@ Para quem vai propor uma reprodução de resultados de referência da literatura
 seção deverá citar o artigo no qual o trabalho se baseia mas deverá ser diferente
 do texto base.
 Exemplo de citação das referências
-bibliográficas~\cite{Russell:2003,Pedrycz:2007,haykin2001redes,Braga:2007}.
+bibliográficas.
 \vspace{2cm}
 \section{Metodologia}
 \vspace{1cm} Como sera realizada a pesquisa? \vspace{1cm}
@@ -81,7 +81,9 @@ da técnica. \vspace{2cm}
 \vspace{1cm} Esta seção deverá trazer as conclusões a respeito da
 abordagem e resultados obtidos. \vspace{2cm}
 
-\bibliographystyle{WCCI}
-\bibliography{modref}
+\section*{Referências}
+\vspace{1cm} [1] R. E. De Góes, L. V. M. Fabris, M. Muller, and J. L. Fabris, “Light-
+assisted detection of methanol in contaminated spirits,” Journal of
+Lightwave Technology, vol. 34, no. 19, pp. 4499–4505, 2016.
 
 \end{document}
