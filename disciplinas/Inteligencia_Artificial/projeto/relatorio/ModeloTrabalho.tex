@@ -38,7 +38,7 @@ De forma complementar ao artigo citado, uma rede neural artificial foi treinada 
 
 Outra abordagem adotada foi submeter as amostras ao PCA, e submeter os valores resultantes das 2 principais componentes a rede neural. Deste modo, o teste obteve uma taxa de sucesso de 80\%.
 
-Os arquivos das amostras, bem como o código fonte da aplicação e relatórios elaborados estão disponíveis através deste \href{https://github.com/danielscosta/mestrado/tree/master/disciplinas/Inteligencia_Artificial/projeto}{link}.
+Os arquivos das amostras, bem como o código fonte da aplicação e relatórios elaborados estão disponíveis através do : \href{https://github.com/danielscosta/mestrado/tree/master/disciplinas/Inteligencia_Artificial/projeto}{link}.
 
 Através dos experimentos realizados pode-se concluir que para uma grande quantidade de features e poucas amostras, a rede neural utilizada é ineficaz na classificação dos dados. Uma vez obtida as principais componentes da amostra através do PCA, a classificação se torna possível por conta da diminuição da quantidade de features avaliadas.
 
@@ -57,24 +57,28 @@ As redes neurais artificiais possuem vastas arquiteturas. As disposições de su
 
 Outra técnica utilizada para este trabalho foi o PCA - Principal Component Analysis. Que realiza um transformada matemática através da features das amostras de forma a criar um novo espaço amostral em que a significância de cada feature é mensurada. Feito isto, optou-se por trabalhar com as 2 componentes de maior significância (96\% e 2\%) como inputs uma rede neural multilayer perceptron.
 
+Para ambas técnicas descritas foram implementados códigos na linguagem python, utilzando-se da biblioteca sklearn.
+
 \subsection{Descrição das abordagens relacionadas}
-\vspace{1cm} Mostrar o enfoque recebido pelo tema já publicado na
-literatura. \vspace{1cm}
+\vspace{1cm} O artigo[1] que dá base a este trabalho apresenta de forma detalhada a aplicabilidade da espectroscopia Raman na identificação de materiais. E utiliza-se do PCA para clusterizar as amostras de forma a evidenciar o grupo de características a ser analisado.
 
-Análise comentada do que já foi escrito sobre o tema procurando
-mostrar os enfoques convergentes e divergentes dos diversos
-autores. \vspace{1cm}
+A matéria de estudo do referido artigo[1] é a cachaça, uma bebida, composta sobretudo por água, etanol e metanol. Para consumo humano, tal bebida não deve conter quantidades significativas de metanol, pois este composto é danoso a saúde humana, podendo em níveis elevados levar até mesmo a morte.
 
-Para quem vai propor uma reprodução de resultados de referência da literatura, esta
-seção deverá citar o artigo no qual o trabalho se baseia mas deverá ser diferente
-do texto base.
-Exemplo de citação das referências
-bibliográficas.
+Foram montados dois conjuntos de amostras, um com uma mistura de água, etanol e metanol, e o outro com cachaças adquiridas em mercados. Para ambos os conjuntos de amostras, os espectros Raman foram mensurados em laboratório gerando arquivos que contém a representação matemática da curva de intensidade luminosa do espectro Raman. O primeiro grupo simulou a composição da cachaça e foi usado como base para definir a transformação de espaço realizada no PCA. No segundo grupo, de modo aleatório, algumas cachaças tiveram metanol misturado a sua composição, de forma a simular uma contaminação.
+
+Nos experimentos realizados, foi avaliado se através do PCA seria possível distinguir das amostras do primeiro conjunto as que continham um teor de metanol. E o resultado mostrou uma separação linear dos que continham uma quantidade significativa de metanol das que não continham. Posteriormente, o segundo conjunto de amostras foi submetido ao PCA, utilizando-se da base de coeficientes obtida pelo primeiro conjunto de forma a revelar se com a mesma metologia, seria possível identificar contaminação em produtos de mercado. E o resultado foi positivo.
+
+Como trabalho futuro o artigo[1] sugere a associação de uma rede neural artificial para avaliar a contaminação por metanol. Uma vez que esta técnica poderia oferecer uma automatização a esta análise. Por isto, este trabalho propoe-se esta atividade.
+
 \vspace{2cm}
 \section{Metodologia}
-\vspace{1cm} Como sera realizada a pesquisa? \vspace{1cm}
+\vspace{1cm} O autor do artigo[1] referenciado forneceu os arquivos contendo a representação matemática da curva de intensidade luminosa do espectro Raman para os dois grupos amostrais citados anteriormente.
 
-Descrever detalhadamente a abordagem proposta. \vspace{2cm}
+Os dados obtidos foram normalizados e o primeiro grupo de dados foi utilizado como base de treinamento da rede neural, e o segundo como base de testes. Foram comparadas duas abordagem, a primeira os dados foram submetidos diretamente a rede neural, com todas as suas features e na segunda, os dados passaram pelo PCA, e apenas as duas principais componentes foram submetidas a rede neural.
+
+A comparação proposta visa avaliar se a rede neural artificial multilayer perceptron poderia promover a mesma transformação de espaço que ocorre no PCA e classificar o resultados de forma assertiva.
+
+\vspace{2cm}
 \section{Simulações e Resultados}
 \vspace{1cm} É interessante que a abordagem possa ser simulada e
 os resultados sejam apresentados nesta seção. Neste caso, o modelo
