@@ -84,7 +84,7 @@ def main():
     ax.legend(targets)
     ax.grid()
 
-    plt.show()
+    plt.show()  
 
 if __name__ == "__main__":
     main()
