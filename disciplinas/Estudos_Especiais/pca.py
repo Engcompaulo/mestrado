@@ -57,7 +57,7 @@ def main():
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(pca_x_train, y_train)
 
-        print('\nPCA:')
+        print('\nPCA: ', n)
 
         y_train_pred = knn.predict(pca_x_train)
         print('Training accuracy on selected features: %.3f' % acc(y_train, y_train_pred))

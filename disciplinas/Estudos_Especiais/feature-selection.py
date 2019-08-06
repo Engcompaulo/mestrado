@@ -1,4 +1,5 @@
 
+from mlxtend.plotting import plot_sequential_feature_selection as plot_sfs
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS  
 from sklearn.metrics import accuracy_score as acc
 import matplotlib.pyplot as plt
@@ -60,7 +61,14 @@ def main():
                 cv=0)
         sfs = sfs.fit(x_train, y_train)
 
-        print('\nSequential Forward Selection:')
+        fig1 = plot_sfs(sfs.get_metric_dict(), kind='std_dev')
+
+        plt.ylim([0.8, 1])
+        plt.title('Sequential Forward Selection (w. StdDev)')
+        plt.grid()
+        plt.show()
+
+        print('\nSequential Floating Forward Selection: ', n)
         feat_cols = list(sfs.k_feature_idx_)
         print(feat_cols) 
         
@@ -72,6 +80,8 @@ def main():
 
         y_test_pred = knn.predict(x_test[:, feat_cols])
         print('Testing accuracy on selected features: %.3f' % acc(y_test, y_test_pred))
+
+
 
 if __name__ == "__main__":
     main()          
