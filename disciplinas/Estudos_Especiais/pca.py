@@ -15,21 +15,33 @@ TRAIN_SIZE = 0.8
 def get_data():    
 
     data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
-    np.random.shuffle(data)
 
-    Y = data[:,:1].ravel()
+    true_data = np.array([d for d in data if d[0] == 0])
+    false_data = np.array([d for d in data if d[0] == 1])
 
-    X = data[:,1:]
-    x_transformed = []
-    for x in X:
-        # x = baseline_als(x)
+    np.random.shuffle(true_data)
+    np.random.shuffle(false_data)
+
+    Y_true = true_data[:,:1].ravel()
+    Y_false = false_data[:,:1].ravel()
+
+    X_true = []
+    for x in true_data[:,1:]:
+        x = baseline_als(x)
         # x = x / x.max(axis=0)
-        x_transformed.append(x)
+        X_true.append(x)
+            
+    X_false = []
+    for x in false_data[:,1:]:
+        x = baseline_als(x)
+        # x = x / x.max(axis=0)
+        X_false.append(x)
     
-    x_data_training = X[:int(len(x_transformed)*TRAIN_SIZE)]
-    y_data_training = Y[:int(len(Y)*TRAIN_SIZE)]
-    x_data_test = X[int(len(x_transformed)*TRAIN_SIZE):]
-    y_data_test = Y[int(len(Y)*TRAIN_SIZE):]      
+    x_data_training = np.array(X_true[:int(len(X_true)*TRAIN_SIZE)] + X_false[:int(len(X_false)*TRAIN_SIZE)])
+    y_data_training = np.concatenate((Y_true[:int(len(Y_true)*TRAIN_SIZE)], Y_false[:int(len(Y_false)*TRAIN_SIZE)]))
+   
+    x_data_test = np.array(X_true[int(len(X_true)*TRAIN_SIZE):] + X_false[int(len(X_false)*TRAIN_SIZE):])
+    y_data_test = np.concatenate((Y_true[int(len(Y_true)*TRAIN_SIZE):], Y_false[int(len(Y_false)*TRAIN_SIZE):]))
     
     return x_data_training, y_data_training, x_data_test, y_data_test
 
@@ -49,10 +61,33 @@ def main():
 
     x_train, y_train, x_test, y_test = get_data()
 
-    for n in [2, 3, 5, 10, 16]:
+    for n in [2, 3, 5, 10, 15]:
         pca = decomposition.PCA(n_components=n)
         pca.fit(x_train)    
-        pca_x_train = pca.transform(x_train)        
+        pca_x_train = pca.transform(x_train) 
+
+        if n == 2:
+            principalDf = pd.DataFrame(data = pca_x_train, columns = ['principal component 1', 'principal component 2'])
+            resultDf = pd.DataFrame(data = y_train, columns = ['target'])
+            finalDf = pd.concat([principalDf, resultDf], axis = 1)
+
+            fig = plt.figure(figsize = (8,8))
+            ax = fig.add_subplot(1,1,1) 
+            ax.set_xlabel('Principal Component 1', fontsize = 15)
+            ax.set_ylabel('Principal Component 2', fontsize = 15)
+            ax.set_title('2 component PCA', fontsize = 20)
+            targets = [True, False]
+            colors = ['r', 'g']
+            for target, color in zip(targets,colors):
+                indicesToKeep = finalDf['target'] == target
+                ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1']
+                        , finalDf.loc[indicesToKeep, 'principal component 2']
+                        , c = color
+                        , s = 50)
+            ax.legend(targets)
+            ax.grid()
+
+            plt.show()        
 
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(pca_x_train, y_train)
