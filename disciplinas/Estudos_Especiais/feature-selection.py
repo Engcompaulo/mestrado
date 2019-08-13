@@ -19,21 +19,33 @@ TRAIN_SIZE = 0.8
 def get_data():    
 
     data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
-    np.random.shuffle(data)
 
-    Y = data[:,:1].ravel()
+    true_data = np.array([d for d in data if d[0] == 0])
+    false_data = np.array([d for d in data if d[0] == 1])
 
-    X = data[:,1:]
-    x_transformed = []
-    for x in X:
-        # x = baseline_als(x)
+    np.random.shuffle(true_data)
+    np.random.shuffle(false_data)
+
+    Y_true = true_data[:,:1].ravel()
+    Y_false = false_data[:,:1].ravel()
+
+    X_true = []
+    for x in true_data[:,1:]:
+        x = baseline_als(x)
         # x = x / x.max(axis=0)
-        x_transformed.append(x)
+        X_true.append(x)
+            
+    X_false = []
+    for x in false_data[:,1:]:
+        x = baseline_als(x)
+        # x = x / x.max(axis=0)
+        X_false.append(x)
     
-    x_data_training = X[:int(len(x_transformed)*TRAIN_SIZE)]
-    y_data_training = Y[:int(len(Y)*TRAIN_SIZE)]
-    x_data_test = X[int(len(x_transformed)*TRAIN_SIZE):]
-    y_data_test = Y[int(len(Y)*TRAIN_SIZE):]      
+    x_data_training = np.array(X_true[:int(len(X_true)*TRAIN_SIZE)] + X_false[:int(len(X_false)*TRAIN_SIZE)])
+    y_data_training = np.concatenate((Y_true[:int(len(Y_true)*TRAIN_SIZE)], Y_false[:int(len(Y_false)*TRAIN_SIZE)]))
+   
+    x_data_test = np.array(X_true[int(len(X_true)*TRAIN_SIZE):] + X_false[int(len(X_false)*TRAIN_SIZE):])
+    y_data_test = np.concatenate((Y_true[int(len(Y_true)*TRAIN_SIZE):], Y_false[int(len(Y_false)*TRAIN_SIZE):]))
     
     return x_data_training, y_data_training, x_data_test, y_data_test
 
