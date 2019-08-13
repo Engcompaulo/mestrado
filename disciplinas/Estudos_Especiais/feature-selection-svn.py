@@ -10,7 +10,7 @@ import pandas as pd
 from scipy import sparse
 from scipy.sparse.linalg import spsolve
 from sklearn import decomposition
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from os import listdir
 from os.path import isfile, join
 
@@ -54,7 +54,7 @@ def main():
     x_train, y_train, x_test, y_test = get_data()
 
     for n in [2, 3, 5, 10, 16]:
-        sfs = SFS(KNeighborsClassifier(n_neighbors=3), 
+        sfs = SFS(SVC(kernel='linear'), 
                 k_features=n,       
                 forward=True, 
                 floating=True, 
@@ -73,13 +73,13 @@ def main():
         feat_cols = list(sfs.k_feature_idx_)
         print(feat_cols) 
         
-        knn = KNeighborsClassifier(n_neighbors=3)
-        knn.fit(x_train[:, feat_cols], y_train)
+        svc = SVC(kernel='linear')
+        svc.fit(x_train[:, feat_cols], y_train)
 
-        y_train_pred = knn.predict(x_train[:, feat_cols])
+        y_train_pred = svc.predict(x_train[:, feat_cols])
         print('Training accuracy on selected features: %.3f' % acc(y_train, y_train_pred))
 
-        y_test_pred = knn.predict(x_test[:, feat_cols])
+        y_test_pred = svc.predict(x_test[:, feat_cols])
         print('Testing accuracy on selected features: %.3f' % acc(y_test, y_test_pred))
 
         print(confusion_matrix(y_test, y_test_pred))
