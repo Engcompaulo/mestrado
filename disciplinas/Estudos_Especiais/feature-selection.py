@@ -74,16 +74,15 @@ def main():
                 cv=0)
         sfs = sfs.fit(x_train, y_train)
 
-        # fig1 = plot_sfs(sfs.get_metric_dict(), kind='std_dev')
-
-        # plt.ylim([0.8, 1])
-        # plt.title('Sequential Forward Selection (w. StdDev)')
-        # plt.grid()
-        # plt.show()
-
         print('\nSequential Floating Forward Selection: ', n)
         feat_cols = list(sfs.k_feature_idx_)
         print(feat_cols) 
+
+        if n == 2:
+            plt.figure(figsize=(8, 8))
+            plt.title("SFS(KNN) Scatter Plot", fontsize='small')
+            plt.scatter(x_train[:, feat_cols[0]], x_train[:, feat_cols[1]], marker='o', c=y_train, s=25, edgecolor='k')
+            plt.show()
         
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(x_train[:, feat_cols], y_train)
