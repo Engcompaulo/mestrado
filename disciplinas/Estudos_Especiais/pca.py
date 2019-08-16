@@ -67,27 +67,10 @@ def main():
         pca_x_train = pca.transform(x_train) 
 
         if n == 2:
-            principalDf = pd.DataFrame(data = pca_x_train, columns = ['principal component 1', 'principal component 2'])
-            resultDf = pd.DataFrame(data = y_train, columns = ['target'])
-            finalDf = pd.concat([principalDf, resultDf], axis = 1)
-
-            fig = plt.figure(figsize = (8,8))
-            ax = fig.add_subplot(1,1,1) 
-            ax.set_xlabel('Principal Component 1', fontsize = 15)
-            ax.set_ylabel('Principal Component 2', fontsize = 15)
-            ax.set_title('2 component PCA', fontsize = 20)
-            targets = [True, False]
-            colors = ['r', 'g']
-            for target, color in zip(targets,colors):
-                indicesToKeep = finalDf['target'] == target
-                ax.scatter(finalDf.loc[indicesToKeep, 'principal component 1']
-                        , finalDf.loc[indicesToKeep, 'principal component 2']
-                        , c = color
-                        , s = 50)
-            ax.legend(targets)
-            ax.grid()
-
-            plt.show()        
+            plt.figure(figsize=(8, 8))
+            plt.title("PCA Scatter Plot", fontsize='small')
+            plt.scatter(pca_x_train[:, 0], pca_x_train[:, 1], marker='o', c=y_train, s=25, edgecolor='k')
+            plt.show()     
 
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(pca_x_train, y_train)
