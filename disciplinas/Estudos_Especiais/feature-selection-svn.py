@@ -10,7 +10,7 @@ import pandas as pd
 from scipy import sparse
 from scipy.sparse.linalg import spsolve
 from sklearn import decomposition
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from os import listdir
 from os.path import isfile, join
 
@@ -19,33 +19,21 @@ TRAIN_SIZE = 0.8
 def get_data():    
 
     data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
+    np.random.shuffle(data)
 
-    true_data = np.array([d for d in data if d[0] == 0])
-    false_data = np.array([d for d in data if d[0] == 1])
+    Y = data[:,:1].ravel()
 
-    np.random.shuffle(true_data)
-    np.random.shuffle(false_data)
-
-    Y_true = true_data[:,:1].ravel()
-    Y_false = false_data[:,:1].ravel()
-
-    X_true = []
-    for x in true_data[:,1:]:
-        x = baseline_als(x)
+    X = data[:,1:]
+    x_transformed = []
+    for x in X:
+        # x = baseline_als(x)
         # x = x / x.max(axis=0)
-        X_true.append(x)
-            
-    X_false = []
-    for x in false_data[:,1:]:
-        x = baseline_als(x)
-        # x = x / x.max(axis=0)
-        X_false.append(x)
+        x_transformed.append(x)
     
-    x_data_training = np.array(X_true[:int(len(X_true)*TRAIN_SIZE)] + X_false[:int(len(X_false)*TRAIN_SIZE)])
-    y_data_training = np.concatenate((Y_true[:int(len(Y_true)*TRAIN_SIZE)], Y_false[:int(len(Y_false)*TRAIN_SIZE)]))
-   
-    x_data_test = np.array(X_true[int(len(X_true)*TRAIN_SIZE):] + X_false[int(len(X_false)*TRAIN_SIZE):])
-    y_data_test = np.concatenate((Y_true[int(len(Y_true)*TRAIN_SIZE):], Y_false[int(len(Y_false)*TRAIN_SIZE):]))
+    x_data_training = X[:int(len(x_transformed)*TRAIN_SIZE)]
+    y_data_training = Y[:int(len(Y)*TRAIN_SIZE)]
+    x_data_test = X[int(len(x_transformed)*TRAIN_SIZE):]
+    y_data_test = Y[int(len(Y)*TRAIN_SIZE):]      
     
     return x_data_training, y_data_training, x_data_test, y_data_test
 
@@ -66,7 +54,7 @@ def main():
     x_train, y_train, x_test, y_test = get_data()
 
     for n in [2, 3, 5, 10, 16]:
-        sfs = SFS(KNeighborsClassifier(n_neighbors=3), 
+        sfs = SFS(SVC(kernel='linear'), 
                 k_features=n,       
                 forward=True, 
                 floating=True, 
@@ -85,13 +73,13 @@ def main():
         feat_cols = list(sfs.k_feature_idx_)
         print(feat_cols) 
         
-        knn = KNeighborsClassifier(n_neighbors=3)
-        knn.fit(x_train[:, feat_cols], y_train)
+        svc = SVC(kernel='linear')
+        svc.fit(x_train[:, feat_cols], y_train)
 
-        y_train_pred = knn.predict(x_train[:, feat_cols])
+        y_train_pred = svc.predict(x_train[:, feat_cols])
         print('Training accuracy on selected features: %.3f' % acc(y_train, y_train_pred))
 
-        y_test_pred = knn.predict(x_test[:, feat_cols])
+        y_test_pred = svc.predict(x_test[:, feat_cols])
         print('Testing accuracy on selected features: %.3f' % acc(y_test, y_test_pred))
 
         print(confusion_matrix(y_test, y_test_pred))
