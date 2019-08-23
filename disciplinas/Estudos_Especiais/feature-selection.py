@@ -18,7 +18,8 @@ TRAIN_SIZE = 0.8
 
 def get_data():    
 
-    data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
+    # data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
+    data = np.genfromtxt('./raman-spectroscopy-of-candida-fungo/candida.csv', delimiter=',')
 
     true_data = np.array([d for d in data if d[0] == 0])
     false_data = np.array([d for d in data if d[0] == 1])
@@ -32,12 +33,14 @@ def get_data():
     X_true = []
     for x in true_data[:,1:]:
         x = baseline_als(x)
+        np.random.shuffle(x)
         # x = x / x.max(axis=0)
         X_true.append(x)
             
     X_false = []
     for x in false_data[:,1:]:
         x = baseline_als(x)
+        np.random.shuffle(x)
         # x = x / x.max(axis=0)
         X_false.append(x)
     
@@ -66,7 +69,7 @@ def main():
     x_train, y_train, x_test, y_test = get_data()
 
     for n in [2, 3, 5, 10, 16]:
-        sfs = SFS(KNeighborsClassifier(n_neighbors=3), 
+        sfs = SFS(KNeighborsClassifier(n_neighbors=5), 
                 k_features=n,       
                 forward=True, 
                 floating=True, 
@@ -77,12 +80,6 @@ def main():
         print('\nSequential Floating Forward Selection: ', n)
         feat_cols = list(sfs.k_feature_idx_)
         print(feat_cols) 
-
-        if n == 2:
-            plt.figure(figsize=(8, 8))
-            plt.title("SFS(KNN) Scatter Plot", fontsize='small')
-            plt.scatter(x_train[:, feat_cols[0]], x_train[:, feat_cols[1]], marker='o', c=y_train, s=25, edgecolor='k')
-            plt.show()
         
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(x_train[:, feat_cols], y_train)
@@ -95,6 +92,14 @@ def main():
 
         print(confusion_matrix(y_test, y_test_pred))
         print(classification_report(y_test, y_test_pred))
+
+        if n == 2:
+            fig, axs = plt.subplots(2)
+            fig.suptitle("SFS(KNN) Scatter Plot", fontsize='small')
+            axs[0].scatter(x_train[:, feat_cols[0]], x_train[:, feat_cols[1]], marker='o', c=y_train, s=25, edgecolor='k')
+            axs[1].scatter(x_test[:, feat_cols[0]], x_test[:, feat_cols[1]], marker='o', c=y_test, s=25, edgecolor='k')
+
+            plt.show()
 
 
 

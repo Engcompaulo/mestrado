@@ -14,7 +14,8 @@ TRAIN_SIZE = 0.8
 
 def get_data():    
 
-    data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
+    # data = np.genfromtxt('./raman-spectroscopy-of-diabetes/earLobe.csv', delimiter=',')[2:,1:]
+    data = np.genfromtxt('./raman-spectroscopy-of-candida-fungo/candida.csv', delimiter=',')
 
     true_data = np.array([d for d in data if d[0] == 0])
     false_data = np.array([d for d in data if d[0] == 1])
@@ -66,12 +67,6 @@ def main():
         pca.fit(x_train)    
         pca_x_train = pca.transform(x_train) 
 
-        if n == 2:
-            plt.figure(figsize=(8, 8))
-            plt.title("PCA Scatter Plot", fontsize='small')
-            plt.scatter(pca_x_train[:, 0], pca_x_train[:, 1], marker='o', c=y_train, s=25, edgecolor='k')
-            plt.show()     
-
         knn = KNeighborsClassifier(n_neighbors=3)
         knn.fit(pca_x_train, y_train)
 
@@ -80,8 +75,17 @@ def main():
         y_train_pred = knn.predict(pca_x_train)
         print('Training accuracy on selected features: %.3f' % acc(y_train, y_train_pred))
 
-        y_test_pred = knn.predict(pca.transform(x_test))
+        pca_x_test = pca.transform(x_test)
+        y_test_pred = knn.predict(pca_x_test)
         print('Testing accuracy on selected features: %.3f' % acc(y_test, y_test_pred))
+
+        if n == 2:
+            fig, axs = plt.subplots(2)
+            fig.suptitle("PCA Scatter Plot", fontsize='small')
+            axs[0].scatter(pca_x_train[:, 0], pca_x_train[:, 1], marker='o', c=y_train, s=25, edgecolor='k')
+            axs[1].scatter(pca_x_test[:, 0], pca_x_test[:, 1], marker='o', c=y_test, s=25, edgecolor='k')
+
+            plt.show()
 
 
 if __name__ == "__main__":
