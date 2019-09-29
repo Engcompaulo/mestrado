@@ -33,7 +33,7 @@ def get_data():
     X_true = []
     for x in true_data[:,1:]:
         x = baseline_als(x)
-        np.random.shuffle(x)
+        # np.random.shuffle(x)
         # x = x / x.max(axis=0)
         X_true.append(x)
             
