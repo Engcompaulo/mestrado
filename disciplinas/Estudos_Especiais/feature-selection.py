@@ -33,14 +33,14 @@ def get_data():
     X_true = []
     for x in true_data[:,1:]:
         x = baseline_als(x)
-        np.random.shuffle(x)
+        # np.random.shuffle(x)
         # x = x / x.max(axis=0)
         X_true.append(x)
             
     X_false = []
     for x in false_data[:,1:]:
         x = baseline_als(x)
-        np.random.shuffle(x)
+        # np.random.shuffle(x)
         # x = x / x.max(axis=0)
         X_false.append(x)
     
@@ -69,9 +69,9 @@ def main():
     x_train, y_train, x_test, y_test = get_data()
 
     for n in [2, 3, 5, 10, 16]:
-        sfs = SFS(KNeighborsClassifier(n_neighbors=5), 
+        sfs = SFS(KNeighborsClassifier(n_neighbors=7), 
                 k_features=n,       
-                forward=True, 
+                forward=False, 
                 floating=True, 
                 scoring='accuracy',
                 cv=0)
