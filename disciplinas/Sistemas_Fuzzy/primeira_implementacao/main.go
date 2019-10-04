@@ -8,10 +8,10 @@ import (
 
 func main() {
 
-	nome_conjunto_fuzzy := os.Args[2]
-	altura, _ := strconv.ParseFloat(os.Args[3], 32)
-	step, _ := strconv.ParseFloat(os.Args[4], 32)
-	alpha_corte, _ := strconv.ParseFloat(os.Args[5], 32)
+	nome_conjunto_fuzzy := os.Args[1]
+	altura, _ := strconv.ParseFloat(os.Args[2], 32)
+	step, _ := strconv.ParseFloat(os.Args[3], 32)
+	alpha_corte, _ := strconv.ParseFloat(os.Args[4], 32)
 
 	funcao_triangular_baixo := [3]float64{1, 1, 1.5}
 	funcao_triangular_medio := [3]float64{1, 1.5, 2}
