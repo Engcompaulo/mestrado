@@ -11,7 +11,7 @@
             "mode": "auto",
             "program": "${fileDirname}/main.go",
             "env": {},
-            "args": ["baixo", "1.4", "0.9", "0.6"]
+            "args": ["baixo", "1.4", "0.01", "0.6"]
         }
     ]
 }
