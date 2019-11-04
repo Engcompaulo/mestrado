@@ -1,5 +1,5 @@
 # Mestrado
-Arquivos/Projetos criados/utilizados no mestrado 
+Arquivos/Projetos criados/utilizados no mestrado(não concluído)
 
 Universidade Tecnológica Federal do Paraná
 
